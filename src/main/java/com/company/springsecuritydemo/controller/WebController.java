@@ -11,7 +11,7 @@ import java.util.Optional;
 @RestController
 public class WebController {
 
-    @GetMapping("/home")
+    @GetMapping({"/home", "/"})
     public String home() {
         return "Hello World";
     }

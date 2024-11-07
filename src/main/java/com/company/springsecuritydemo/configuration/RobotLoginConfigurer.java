@@ -13,14 +13,14 @@ public class RobotLoginConfigurer extends AbstractHttpConfigurer<RobotLoginConfi
     private final List<String> passwords = new ArrayList<>();
 
     @Override
-    public void init(HttpSecurity builder) throws Exception {
-        builder.authenticationProvider(new RobotAuthenticationProvider(passwords));
+    public void init(HttpSecurity httpSecurity) throws Exception {
+        httpSecurity.authenticationProvider(new RobotAuthenticationProvider(passwords));
     }
 
     @Override
-    public void configure(HttpSecurity builder) throws Exception {
-        var authenticationManager = builder.getSharedObject(AuthenticationManager.class);
-        builder.addFilterBefore(new RobotFilter(authenticationManager), AuthorizationFilter.class);
+    public void configure(HttpSecurity httpSecurity) throws Exception {
+        var authenticationManager = httpSecurity.getSharedObject(AuthenticationManager.class);
+        httpSecurity.addFilterBefore(new RobotFilter(authenticationManager), AuthorizationFilter.class);
     }
 
     public RobotLoginConfigurer password(String password) {
